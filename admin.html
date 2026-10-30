@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>FHR – Espace privé</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="images/logo.png" alt="Logo FHR" onerror="this.style.display='none'" />
+      <div><h1>FHR</h1><span>Espace privé du bureau</span></div>
+    </div>
+    <nav><a href="index.html">← Site public</a><a href="#" id="deconnexion">Déconnexion</a></nav>
+  </header>
+
+  <!-- Connexion -->
+  <section id="ecran-connexion">
+    <div class="boite" style="max-width:380px;margin:40px auto;background:#fff;padding:28px;border-radius:14px;border-top:8px solid var(--rose)">
+      <h2 style="color:var(--bleu);margin-top:0">Connexion</h2>
+      <form class="carte-form" id="form-connexion">
+        <input type="password" id="mdp" placeholder="Mot de passe de l'équipe" required />
+        <button type="submit">Entrer</button>
+        <div class="message" id="msg-connexion"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Espace privé -->
+  <section id="espace" style="display:none">
+    <div class="onglets">
+      <button data-p="p-evenements" class="actif">Événements</button>
+      <button data-p="p-inscrits">Inscrits</button>
+      <button data-p="p-budget">Budget</button>
+      <button data-p="p-sponsors">To-do sponsors</button>
+    </div>
+
+    <div class="panneau actif" id="p-evenements">
+      <h2 class="titre">Créer un événement</h2>
+      <form class="carte-form" id="form-evenement" style="max-width:560px">
+        <input name="title" placeholder="Titre (ex : Tournoi à 7 de Toussaint)" required />
+        <input name="event_date" type="date" required />
+        <input name="event_time" type="time" />
+        <input name="location" placeholder="Lieu" required />
+        <textarea name="description" rows="3" placeholder="Description"></textarea>
+        <button type="submit">Ajouter l'événement</button>
+      </form>
+      <h2 class="titre" style="margin-top:36px">Événements publiés</h2>
+      <table><thead><tr><th>Date</th><th>Heure</th><th>Titre</th><th>Lieu</th><th></th></tr></thead><tbody id="t-evenements"></tbody></table>
+    </div>
+
+    <div class="panneau" id="p-inscrits">
+      <h2 class="titre">Inscrits par événement</h2>
+      <button class="secondaire" id="export-inscrits">Télécharger tout (Excel/CSV)</button>
+      <div id="tableaux-inscrits" style="margin-top:20px"></div>
+    </div>
+
+    <div class="panneau" id="p-budget">
+      <h2 class="titre">Budget</h2>
+      <div class="totaux">
+        <div class="total">Recettes<b id="tot-recettes">0 €</b></div>
+        <div class="total">Dépenses<b id="tot-depenses">0 €</b></div>
+        <div class="total">Solde<b id="tot-solde">0 €</b></div>
+      </div>
+      <form class="carte-form" id="form-budget" style="max-width:560px">
+        <input name="label" placeholder="Libellé (ex : Location minibus)" required />
+        <select name="entry_type"><option value="depense">Dépense</option><option value="recette">Recette</option></select>
+        <input name="category" placeholder="Catégorie (Équipement, Déplacement, Sponsoring…)" />
+        <input name="amount" type="number" step="0.01" min="0" placeholder="Montant (€)" required />
+        <input name="entry_date" type="date" required />
+        <button type="submit">Ajouter au budget</button>
+      </form>
+      <div style="margin-top:20px"><button class="secondaire" id="export-budget">Télécharger le budget (CSV)</button></div>
+      <table style="margin-top:14px"><thead><tr><th>Date</th><th>Libellé</th><th>Catégorie</th><th>Type</th><th>Montant</th></tr></thead><tbody id="t-budget"></tbody></table>
+    </div>
+
+    <div class="panneau" id="p-sponsors">
+      <h2 class="titre">To-do sponsors</h2>
+      <form class="carte-form" id="form-todo" style="max-width:560px;grid-template-columns:1fr 2fr auto">
+        <input name="sponsor" placeholder="Sponsor" required />
+        <input name="task" placeholder="Action (ex : poster le logo sur Instagram)" required />
+        <button type="submit">Ajouter</button>
+      </form>
+      <div id="liste-todos" style="margin-top:20px"></div>
+    </div>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

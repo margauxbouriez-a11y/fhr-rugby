@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FHR – Filles HEC Rugby</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="images/logo.png" alt="Logo FHR" onerror="this.style.display='none'" />
+      <div><h1>FHR</h1><span>Filles HEC Rugby</span></div>
+    </div>
+    <nav>
+      <a href="#joueuses">Joueuses</a>
+      <a href="#entrainements">Entraînements</a>
+      <a href="#calendrier">Calendrier</a>
+      <a href="#tournois">Tournois</a>
+      <a href="#partenaires">Partenaires</a>
+      <a href="#evenements">Événements</a>
+      <a href="admin.html" class="prive">Espace privé</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Passion, esprit d'équipe <em>&amp;</em> excellence</h2>
+    <p>L'équipe de rugby féminine d'HEC Paris depuis 2004 – Championnes de France 2023, vice-championnes 2024.</p>
+  </div>
+
+  <section id="joueuses">
+    <h2 class="titre">Nos joueuses</h2>
+    <div class="grille" id="liste-joueuses"></div>
+  </section>
+
+  <section id="entrainements">
+    <h2 class="titre">Entraînements de la semaine</h2>
+    <div id="liste-entrainements"></div>
+  </section>
+
+  <section id="calendrier">
+    <h2 class="titre">Calendrier des compétitions 2026-2027</h2>
+    <div id="liste-competitions" class="calendrier"></div>
+  </section>
+
+  <section id="tournois">
+    <h2 class="titre">Nos derniers tournois</h2>
+    <div class="galerie" id="galerie"></div>
+  </section>
+
+  <section id="partenaires">
+    <h2 class="titre">Nos partenaires</h2>
+    <div class="partenaires" id="liste-partenaires"></div>
+  </section>
+
+  <section id="evenements">
+    <h2 class="titre">Événements de la semaine</h2>
+    <div class="grille" id="liste-evenements"><p class="vide">Chargement des événements…</p></div>
+  </section>
+
+  <div class="modal" id="modal-inscription">
+    <div class="boite">
+      <h3 id="modal-titre" style="color:var(--bleu);margin-top:0">Inscription</h3>
+      <form class="carte-form" id="form-inscription">
+        <input name="first_name" placeholder="Prénom" required />
+        <input name="last_name" placeholder="Nom" required />
+        <input name="email" type="email" placeholder="Email" required />
+        <input name="phone" placeholder="Téléphone" />
+        <div style="display:flex;gap:10px">
+          <button type="submit">Je m'inscris</button>
+          <button type="button" class="secondaire" id="fermer-modal">Annuler</button>
+        </div>
+        <div class="message" id="msg-inscription"></div>
+      </form>
+    </div>
+  </div>
+
+  <footer>Fait avec passion par les <b>FHR</b> – Filles HEC Rugby</footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
