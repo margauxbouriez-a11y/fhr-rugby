@@ -1,178 +1,250 @@
 /* =====================================================
    FHR – Filles HEC Rugby
-   Design inspiré de la vidéo et du logo : bleu marine,
-   rose vif, titres en capitales grasses avec bandeau rose.
+   Marine et rose du maillot, typographie condensée des
+   numéros de maillot, bandeau à cerceaux en signature.
    ===================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap");
-
 :root {
+  --marine: #10164a;
+  --nuit: #090c2c;
   --rose: #e6007e;
-  --rose-fonce: #c4006b;
-  --rose-clair: #ffe3f1;
-  --bleu: #141a4a;        /* bleu marine du maillot */
-  --bleu-nuit: #0c1033;
-  --bleu-vif: #2b3a9e;
+  --rose-fonce: #b80065;
+  --rose-pale: #fde6f2;
+  --craie: #f4f5f9;
   --blanc: #ffffff;
-  --gris: #f3f4f9;
-  --texte: #161a33;
-  --radius: 16px;
-  --ombre: 0 10px 30px rgba(12, 16, 51, .12);
+  --ardoise: #585d80;
+  --trait: #dfe1ec;
+  --texte: #12163a;
+
+  --titre: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --corps: "Barlow", "Segoe UI", Roboto, Arial, sans-serif;
+
+  --conteneur: 1180px;
+  --gouttiere: clamp(16px, 4vw, 40px);
+  --rayon: 6px;
 }
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
-body { margin: 0; font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif; color: var(--texte); background: var(--gris); line-height: 1.5; }
-a { color: var(--rose); }
-img { max-width: 100%; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; font-family: var(--corps); font-size: 1.0625rem; line-height: 1.6; color: var(--texte); background: var(--craie); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: var(--rose-fonce); }
+h1, h2, h3 { font-family: var(--titre); line-height: 1.02; margin: 0; letter-spacing: .005em; }
+h2 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 800; color: var(--marine); }
+h3 { font-size: 1.45rem; font-weight: 700; }
+p { margin: 0 0 1em; }
+:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+
+.evitement { position: absolute; left: -999px; top: 8px; background: var(--blanc); padding: 8px 14px; z-index: 100; }
+.evitement:focus { left: 8px; }
+
+.conteneur { max-width: var(--conteneur); margin: 0 auto; padding: 0 var(--gouttiere); }
+.vide { color: var(--ardoise); font-style: italic; list-style: none; }
+
+/* ---------- Boutons ---------- */
+.bouton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--corps); font-weight: 700; font-size: 1rem; padding: 13px 24px; border-radius: var(--rayon); border: 2px solid transparent; text-decoration: none; cursor: pointer; transition: background-color .15s, color .15s, border-color .15s; }
+.bouton:disabled { opacity: .6; cursor: wait; }
+.bouton-rose { background: var(--rose); color: var(--blanc); }
+.bouton-rose:hover { background: var(--rose-fonce); }
+.bouton-clair { background: transparent; color: var(--blanc); border-color: rgba(255, 255, 255, .7); }
+.bouton-clair:hover { background: var(--blanc); color: var(--marine); }
+.bouton-ligne { background: transparent; color: var(--marine); border-color: var(--marine); }
+.bouton-ligne:hover { background: var(--marine); color: var(--blanc); }
 
 /* ---------- En-tête ---------- */
-header {
-  background: var(--bleu-nuit);
-  color: var(--blanc);
-  padding: 12px 5%;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  position: sticky; top: 0; z-index: 10;
-  border-bottom: 4px solid var(--rose);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
-}
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand img { width: 60px; height: 60px; border-radius: 50%; background: var(--blanc); object-fit: contain; box-shadow: 0 0 0 3px var(--rose); }
-.brand h1 { margin: 0; font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; line-height: 1; }
-.brand span { display: block; font-size: .78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; opacity: .85; margin-top: 4px; }
-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
-nav a { color: var(--blanc); text-decoration: none; padding: 8px 12px; font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .5px; border-radius: 8px; transition: background .2s, color .2s; }
-nav a:hover { background: rgba(255, 255, 255, .1); color: var(--blanc); }
-nav a.prive { background: var(--rose); padding: 9px 16px; border-radius: 999px; margin-left: 6px; }
-nav a.prive:hover { background: var(--rose-fonce); }
+.entete { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px var(--gouttiere); background: var(--nuit); color: var(--blanc); }
+.marque { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+.marque img { width: 44px; height: 44px; border-radius: 50%; background: var(--blanc); object-fit: contain; }
+.marque b { display: block; font-family: var(--titre); font-size: 1.6rem; font-weight: 800; line-height: 1; letter-spacing: .04em; }
+.marque small { display: block; font-size: .8rem; opacity: .75; }
+.entete nav { display: flex; align-items: center; gap: 2px; }
+.entete nav a { color: var(--blanc); text-decoration: none; font-weight: 600; font-size: .95rem; padding: 8px 12px; border-radius: var(--rayon); }
+.entete nav a:hover { background: rgba(255, 255, 255, .1); }
+.entete nav a.nav-cta { background: var(--rose); margin-left: 10px; padding: 9px 16px; }
+.entete nav a.nav-cta:hover { background: var(--rose-fonce); }
+.menu-bouton { display: none; background: none; color: var(--blanc); border: 2px solid rgba(255, 255, 255, .5); border-radius: var(--rayon); padding: 7px 14px; font: 600 .95rem var(--corps); cursor: pointer; }
 
-/* ---------- Bandeau d'accueil (photos de la vidéo) ---------- */
-.hero {
-  position: relative;
-  text-align: center;
-  padding: 140px 5% 120px;
-  color: var(--blanc);
-  background:
-    linear-gradient(180deg, rgba(12, 16, 51, .55) 0%, rgba(12, 16, 51, .82) 70%, var(--bleu-nuit) 100%),
-    url("images/hero.jpg") center / cover no-repeat,
-    var(--bleu-nuit);
-}
-.hero::before { content: ""; display: block; width: 90px; height: 10px; border-radius: 6px; background: var(--rose); margin: 0 auto 26px; }
-.hero h2 { font-size: clamp(2.1rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.08; text-transform: uppercase; margin: 0 auto 22px; max-width: 900px; text-shadow: 0 4px 18px rgba(0, 0, 0, .35); }
-.hero h2 em { font-style: normal; background: var(--rose); color: var(--blanc); padding: 0 .22em; border-radius: 10px; display: inline-block; text-shadow: none; }
-.hero p { max-width: 660px; margin: 0 auto; font-size: 1.1rem; font-weight: 600; opacity: .95; }
+/* ---------- Accueil ---------- */
+.hero { position: relative; min-height: min(88vh, 760px); display: flex; align-items: flex-end; background: var(--nuit); color: var(--blanc); overflow: hidden; }
+.hero-photo { position: absolute; inset: 0; background: var(--nuit) center 30% / cover no-repeat; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9, 12, 44, .92) 0%, rgba(9, 12, 44, .65) 45%, rgba(9, 12, 44, .15) 100%), linear-gradient(0deg, rgba(9, 12, 44, .85) 0%, rgba(9, 12, 44, 0) 45%); }
+.hero-contenu { position: relative; width: 100%; max-width: var(--conteneur); margin: 0 auto; padding: 120px var(--gouttiere) clamp(56px, 9vh, 96px); }
+.hero h1 { font-size: clamp(3.2rem, 9vw, 7.4rem); font-weight: 800; line-height: .92; max-width: 11ch; margin-bottom: 26px; text-wrap: balance; }
+.hero-texte { font-size: clamp(1.05rem, 1.6vw, 1.25rem); max-width: 52ch; opacity: .92; margin-bottom: 32px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Signature : les cerceaux du maillot */
+.cerceaux { height: 30px; background: repeating-linear-gradient(180deg, var(--marine) 0 10px, var(--rose) 10px 20px); }
+
+/* ---------- Chiffres clés ---------- */
+.chiffres { background: var(--marine); color: var(--blanc); padding: 40px 0; }
+.chiffres-liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: 0; }
+.chiffre { display: flex; flex-direction: column-reverse; padding: 6px 24px; border-left: 2px solid rgba(255, 255, 255, .18); }
+.chiffre:first-child { border-left: 0; padding-left: 0; }
+.chiffre dd { margin: 0; font-family: var(--titre); font-size: clamp(2.8rem, 5vw, 3.8rem); font-weight: 800; line-height: 1; color: var(--blanc); }
+.chiffre dt { color: #c9cbe3; font-size: .98rem; margin-top: 6px; }
 
 /* ---------- Sections ---------- */
-section { padding: 72px 5%; }
-section:nth-of-type(even) { background: var(--blanc); }
-section > * { max-width: 1180px; margin-left: auto; margin-right: auto; }
-section h2.titre {
-  font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 900; color: var(--bleu);
-  text-transform: uppercase; letter-spacing: .5px; line-height: 1.1;
-  margin-top: 0; margin-bottom: 30px; padding: 0; border: 0;
-}
-section h2.titre::before { content: ""; display: block; width: 64px; height: 8px; border-radius: 5px; background: var(--rose); margin-bottom: 14px; }
+.bloc { padding: clamp(64px, 9vw, 112px) 0; }
+.bloc-blanc { background: var(--blanc); }
+.bloc-nuit { background: var(--nuit); color: var(--blanc); }
+.bloc-nuit h2 { color: var(--blanc); }
+.titre-section { margin-bottom: 40px; max-width: 62ch; }
+.titre-section h2 { margin-bottom: 12px; }
+.titre-section p { color: var(--ardoise); font-size: 1.1rem; margin: 0; }
+.bloc-nuit .titre-section p { color: #b8bad6; }
 
-/* ---------- Joueuses ---------- */
-.grille { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-.carte { background: var(--blanc); border-radius: var(--radius); overflow: hidden; box-shadow: var(--ombre); transition: transform .25s, box-shadow .25s; }
-.carte:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(12, 16, 51, .2); }
-.carte img { width: 100%; height: 250px; object-fit: cover; background: var(--rose-clair); display: block; }
-.carte .contenu { padding: 16px 18px 18px; border-top: 5px solid var(--rose); }
-.carte h3 { margin: 0 0 4px; color: var(--bleu); font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; }
-.carte .contenu > div { color: #5a5f7d; font-weight: 600; font-size: .9rem; text-transform: uppercase; letter-spacing: .5px; }
-.numero { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; background: var(--rose); color: var(--blanc); border-radius: 8px; padding: 2px 8px; font-weight: 900; margin-right: 10px; }
+/* ---------- Le club ---------- */
+.club { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.club h2 { margin-bottom: 24px; max-width: 16ch; }
+.texte-long { max-width: 62ch; font-size: 1.15rem; line-height: 1.7; }
+.palmares { background: var(--blanc); border-top: 6px solid var(--rose); padding: 28px 30px 18px; border-radius: 0 0 var(--rayon) var(--rayon); }
+.palmares h3 { color: var(--marine); margin-bottom: 14px; }
+.palmares ol { list-style: none; margin: 0; padding: 0; }
+.palmares li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--trait); font-weight: 600; }
+.palmares .annee { font-family: var(--titre); font-weight: 800; font-size: 1.6rem; color: var(--rose); line-height: 1; }
 
-/* ---------- Entraînements ---------- */
-#liste-entrainements { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-.entrainement { display: flex; flex-direction: column; gap: 8px; background: var(--bleu); color: var(--blanc); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--ombre); position: relative; overflow: hidden; }
-.entrainement::after { content: ""; position: absolute; right: -30px; top: -30px; width: 110px; height: 110px; border-radius: 50%; background: var(--rose); opacity: .22; }
-.entrainement .jour { display: inline-block; width: fit-content; background: var(--rose); color: var(--blanc); font-weight: 900; text-transform: uppercase; font-size: 1.15rem; padding: 2px 12px; border-radius: 8px; }
-.entrainement b { font-size: 1.25rem; }
+/* ---------- L'équipe ---------- */
+.joueuses { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 22px; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); }
+.joueuse-photo { position: relative; aspect-ratio: 4 / 5; background: var(--marine); border-radius: var(--rayon); overflow: hidden; }
+.joueuse-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.joueuse-initiales { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--titre); font-size: 4rem; font-weight: 800; color: rgba(255, 255, 255, .22); }
+.joueuse-infos { display: flex; align-items: center; gap: 14px; padding-top: 14px; }
+.maillot { flex: none; font-family: var(--titre); font-weight: 800; font-size: 2.6rem; line-height: .9; color: var(--rose); min-width: 1.4em; }
+.joueuse h3 { font-size: 1.3rem; color: var(--marine); }
+.joueuse p { margin: 2px 0 0; color: var(--ardoise); font-size: .95rem; }
 
-/* ---------- Galerie des tournois ---------- */
-.galerie { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-.galerie figure { margin: 0; border-radius: var(--radius); overflow: hidden; position: relative; background: var(--rose-clair); box-shadow: var(--ombre); }
-.galerie img { width: 100%; height: 360px; object-fit: cover; display: block; transition: transform .5s; }
-.galerie figure:hover img { transform: scale(1.05); }
-.galerie figcaption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(12, 16, 51, .92)); color: var(--blanc); padding: 40px 16px 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
+/* ---------- La saison ---------- */
+.saison { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.calendrier { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--marine); }
+.competition { display: grid; grid-template-columns: 96px 1fr auto; gap: 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--trait); }
+.competition time { display: flex; flex-direction: column; font-family: var(--titre); color: var(--marine); line-height: 1; }
+.competition time b { font-size: 2rem; font-weight: 800; }
+.competition time span { font-size: 1.05rem; font-weight: 700; color: var(--rose); margin-top: 4px; }
+.competition h3 { color: var(--marine); font-size: 1.4rem; }
+.competition p { margin: 4px 0 0; color: var(--ardoise); font-size: .95rem; }
+.competition.passee { opacity: .55; }
+.competition.prochaine { background: var(--blanc); margin: 0 -16px; padding-left: 16px; padding-right: 16px; box-shadow: inset 4px 0 0 var(--rose); }
+.etat, .resultat { font-size: .85rem; font-weight: 700; padding: 5px 10px; border-radius: 4px; white-space: nowrap; background: var(--craie); color: var(--ardoise); border: 1px solid var(--trait); }
+.etat-prochain { background: var(--rose-pale); color: var(--rose-fonce); border-color: transparent; }
+.resultat { background: var(--marine); color: var(--blanc); border-color: var(--marine); }
+.entrainements { background: var(--marine); color: var(--blanc); padding: 28px 30px; border-radius: var(--rayon); }
+.entrainements h3 { margin-bottom: 8px; }
+.entrainements ul { list-style: none; margin: 0; padding: 0; }
+.entrainements li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 14px 0; border-top: 1px solid rgba(255, 255, 255, .15); }
+.entrainements li b { font-family: var(--titre); font-size: 1.35rem; font-weight: 700; }
+.entrainements li span { font-weight: 700; color: #ff9fd0; align-self: center; }
+.entrainements li small { grid-column: 1 / -1; color: #c9cbe3; font-size: .9rem; }
+
+/* ---------- Tournois ---------- */
+.galerie { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); grid-auto-rows: 340px; grid-auto-flow: dense; }
+.photo { position: relative; padding: 0; border: 0; border-radius: var(--rayon); overflow: hidden; cursor: zoom-in; background: var(--marine); color: var(--blanc); text-align: left; font: inherit; }
+.photo.photo-une { grid-column: span 2; grid-row: span 2; }
+.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.photo:hover img { transform: scale(1.04); }
+.photo span { position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 16px 14px; background: linear-gradient(transparent, rgba(9, 12, 44, .9)); font-family: var(--titre); font-weight: 700; font-size: 1.3rem; line-height: 1.1; }
+.photo span small { display: block; font-family: var(--corps); font-weight: 500; font-size: .85rem; opacity: .8; margin-top: 4px; }
+
+.visionneuse { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+.visionneuse::backdrop { background: rgba(9, 12, 44, .94); }
+.visionneuse[open] { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; }
+.visionneuse figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.visionneuse img { max-width: 100%; max-height: 84vh; object-fit: contain; border-radius: var(--rayon); }
+.visionneuse figcaption { color: var(--blanc); font-family: var(--titre); font-size: 1.35rem; font-weight: 700; }
+.visionneuse button { background: none; border: 0; color: var(--blanc); font-size: 2.6rem; cursor: pointer; line-height: 1; padding: 10px; }
+.visionneuse-fermer { position: fixed; top: 12px; right: 18px; }
 
 /* ---------- Partenaires ---------- */
-.partenaires { display: flex; flex-wrap: wrap; gap: 20px; }
-.partenaire { background: var(--blanc); border: 2px solid #e6e8f2; border-radius: var(--radius); width: 220px; height: 130px; display: flex; align-items: center; justify-content: center; padding: 18px; text-decoration: none; color: var(--bleu); font-weight: 800; transition: border-color .2s, transform .2s; }
-.partenaire:hover { border-color: var(--rose); transform: translateY(-3px); }
-.partenaire img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.niveau + .niveau { margin-top: 44px; }
+.niveau h3 { font-size: 1.25rem; color: var(--ardoise); font-weight: 700; margin-bottom: 16px; }
+.logos { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.niveau-principal .logos { grid-template-columns: minmax(0, 560px); }
+.partenaire { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--trait); border-radius: var(--rayon); padding: 22px; color: var(--texte); text-decoration: none; background: var(--blanc); transition: border-color .15s; }
+a.partenaire:hover { border-color: var(--rose); }
+.partenaire .logo { height: 96px; display: grid; place-items: center; }
+.niveau-principal .partenaire .logo { height: 150px; }
+.partenaire .logo img { max-height: 100%; max-width: 100%; object-fit: contain; }
+.logo-texte { font-family: var(--titre); font-weight: 800; font-size: 1.8rem; color: var(--marine); text-align: center; }
+.partenaire p { margin: 0; font-size: .92rem; color: var(--ardoise); }
+
+/* ---------- Devenir partenaire ---------- */
+.partenariat { background: var(--blanc); }
+.partenariat-intro { max-width: 64ch; margin-bottom: 44px; }
+.partenariat-intro h2 { margin-bottom: 16px; }
+.partenariat-intro p { font-size: 1.15rem; color: var(--ardoise); }
+.offres { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: stretch; }
+.offre { position: relative; border: 1px solid var(--trait); border-radius: var(--rayon); padding: 30px 28px; background: var(--craie); display: flex; flex-direction: column; }
+.offre h3 { font-size: 1.8rem; color: var(--marine); }
+.offre .prix { font-weight: 700; color: var(--rose-fonce); margin: 8px 0 18px; font-size: 1.1rem; }
+.offre ul { margin: 0; padding: 0; list-style: none; }
+.offre li { padding: 9px 0 9px 26px; border-top: 1px solid var(--trait); position: relative; }
+.offre li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 12px; height: 6px; border-left: 2.5px solid var(--rose); border-bottom: 2.5px solid var(--rose); transform: rotate(-45deg); }
+.offre-phare { background: var(--marine); color: var(--blanc); border-color: var(--marine); }
+.offre-phare h3 { color: var(--blanc); }
+.offre-phare .prix { color: #ff9fd0; }
+.offre-phare li { border-color: rgba(255, 255, 255, .16); }
+.offre-badge { position: absolute; top: -13px; left: 26px; margin: 0; background: var(--rose); color: var(--blanc); font-size: .85rem; font-weight: 700; padding: 3px 12px; border-radius: 4px; }
+.contact { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 30px; border-radius: var(--rayon); background: var(--rose-pale); }
+.contact h3 { font-size: 1.8rem; color: var(--marine); margin-bottom: 6px; }
+.contact p { margin: 0; color: var(--texte); }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end; }
+.contact-details { flex-basis: 100%; display: flex; gap: 18px; justify-content: flex-end; font-weight: 600; }
 
 /* ---------- Événements ---------- */
-.evenement { background: var(--blanc); border-radius: var(--radius); padding: 22px; box-shadow: var(--ombre); border-top: 6px solid var(--rose); display: flex; flex-direction: column; gap: 4px; }
-.evenement h3 { margin: 0 0 6px; color: var(--bleu); font-weight: 900; text-transform: uppercase; }
-.evenement .meta { color: var(--rose); font-weight: 800; margin-bottom: 4px; }
-.evenement p { flex: 1; }
-.evenement button { align-self: flex-start; }
+.evenements { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.evenement { background: var(--blanc); border-radius: var(--rayon); padding: 26px; display: flex; flex-direction: column; border-top: 4px solid var(--marine); }
+.evenement h3 { color: var(--marine); font-size: 1.6rem; margin-bottom: 6px; }
+.evenement-date { color: var(--rose-fonce); font-weight: 700; margin-bottom: 8px; }
+.evenement-lieu { color: var(--ardoise); font-weight: 600; }
+.evenement p:last-of-type { flex: 1; }
+.evenement .bouton { align-self: flex-start; }
 
-/* ---------- Boutons & formulaires ---------- */
-button, .btn { background: var(--rose); color: var(--blanc); border: none; border-radius: 999px; padding: 11px 22px; font-weight: 800; cursor: pointer; font-size: .9rem; font-family: inherit; text-transform: uppercase; letter-spacing: .5px; transition: background .2s, transform .1s; }
-button:hover { background: var(--rose-fonce); }
-button:active { transform: scale(.98); }
-button.secondaire { background: var(--bleu); }
-button.secondaire:hover { background: var(--bleu-vif); }
-button.danger { background: #c0392b; }
-
-form.carte-form { display: grid; gap: 10px; }
-input, select, textarea { width: 100%; padding: 11px 13px; border: 2px solid #dfe2ee; border-radius: 10px; font-size: .95rem; font-family: inherit; background: var(--blanc); }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px var(--rose-clair); }
-
-.modal { position: fixed; inset: 0; background: rgba(12, 16, 51, .7); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
-.modal.ouvert { display: flex; }
-.modal .boite { background: var(--blanc); border-radius: var(--radius); padding: 26px; max-width: 440px; width: 100%; border-top: 8px solid var(--rose); }
-.modal h3 { text-transform: uppercase; font-weight: 900; }
-
-.message { padding: 10px 14px; border-radius: 10px; margin-top: 10px; display: none; font-weight: 600; }
-.message.ok { display: block; background: #e3f9e5; color: #1e7b34; }
-.message.erreur { display: block; background: #fde2e2; color: #a12020; }
-
-/* ---------- Tableaux (espace privé) ---------- */
-table { width: 100%; border-collapse: collapse; background: var(--blanc); border-radius: var(--radius); overflow: hidden; box-shadow: var(--ombre); }
-th { background: var(--bleu); color: var(--blanc); text-align: left; padding: 12px 10px; font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; }
-td { padding: 10px; border-bottom: 1px solid #eef0f6; }
-tr:nth-child(even) td { background: #fafbff; }
-
-.onglets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-.onglets button { background: var(--blanc); color: var(--bleu); border: 2px solid var(--bleu); }
-.onglets button:hover { background: var(--gris); }
-.onglets button.actif { background: var(--rose); border-color: var(--rose); color: var(--blanc); }
-.panneau { display: none; }
-.panneau.actif { display: block; }
-.totaux { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
-.total { background: var(--blanc); border-radius: var(--radius); padding: 16px 22px; min-width: 180px; box-shadow: var(--ombre); border-left: 6px solid var(--rose); font-weight: 700; text-transform: uppercase; font-size: .8rem; color: #5a5f7d; }
-.total b { display: block; font-size: 1.6rem; color: var(--bleu); text-transform: none; margin-top: 4px; }
-.todo { display: flex; align-items: center; gap: 12px; background: var(--blanc); padding: 12px 16px; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, .05); }
-.todo input { width: 22px; height: 22px; accent-color: var(--rose); }
-.todo.fait span { text-decoration: line-through; opacity: .55; }
-.vide { opacity: .6; font-style: italic; }
+/* ---------- Fenêtres & formulaires ---------- */
+.fenetre { border: 0; border-radius: var(--rayon); padding: 0; width: min(440px, calc(100vw - 32px)); border-top: 6px solid var(--rose); }
+.fenetre::backdrop { background: rgba(9, 12, 44, .7); }
+.formulaire { display: grid; gap: 14px; padding: 28px; }
+.formulaire h3 { color: var(--marine); font-size: 1.7rem; }
+label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; color: var(--texte); }
+input, select, textarea { width: 100%; font: 400 1rem var(--corps); padding: 11px 13px; border: 1.5px solid var(--trait); border-radius: var(--rayon); background: var(--blanc); color: var(--texte); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px var(--rose-pale); }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.message { display: none; margin: 0; padding: 10px 14px; border-radius: var(--rayon); font-weight: 600; }
+.message.ok { display: block; background: #e2f5e7; color: #1c6b31; }
+.message.erreur { display: block; background: #fde3e3; color: #a12020; }
 
 /* ---------- Pied de page ---------- */
-footer { background: var(--bleu-nuit); color: var(--blanc); text-align: center; padding: 34px 5%; font-weight: 600; border-top: 4px solid var(--rose); }
-footer b { color: var(--rose); font-weight: 900; }
-
-/* ---------- Calendrier des compétitions ---------- */
-.calendrier { display: flex; flex-direction: column; gap: 14px; max-width: 820px; margin: 0 auto; }
-.competition { display: flex; align-items: stretch; background: var(--blanc); border-radius: var(--radius); overflow: hidden; box-shadow: var(--ombre); transition: transform .2s; }
-.competition:hover { transform: translateX(4px); }
-.comp-date { background: var(--rose); color: var(--blanc); min-width: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; text-transform: uppercase; text-align: center; }
-.comp-date b { font-size: 1.9rem; font-weight: 900; line-height: 1; }
-.comp-date span { font-size: .8rem; font-weight: 800; margin-top: 6px; letter-spacing: 1px; }
-.comp-info { padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; border-left: 6px solid var(--bleu); flex: 1; }
-.comp-info h3 { margin: 0 0 4px; color: var(--bleu); text-transform: uppercase; font-weight: 900; }
-.competition.passee { opacity: .5; }
-.competition.passee .comp-date { background: #8a8fa8; }
-.tag { display: inline-block; margin-top: 6px; font-size: .72rem; font-weight: 800; text-transform: uppercase; background: var(--bleu); color: var(--blanc); padding: 3px 10px; border-radius: 6px; width: fit-content; }
+.pied { background: var(--nuit); color: #c9cbe3; padding: 44px 0; }
+.pied-grille { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+.pied a { color: var(--blanc); }
+.marque-pied { color: var(--blanc); }
+.sociaux { display: flex; gap: 16px; margin-top: 4px; }
+.lien-prive { font-size: .9rem; opacity: .7; }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 760px) {
-  header { position: static; }
-  nav { width: 100%; }
-  nav a { font-size: .78rem; padding: 7px 9px; }
-  .hero { padding: 90px 6% 80px; }
-  section { padding: 54px 5%; }
-  .comp-date { min-width: 96px; }
-  .galerie img { height: 300px; }
+@media (max-width: 980px) {
+  .menu-bouton { display: block; }
+  .entete { flex-wrap: wrap; }
+  .entete nav { display: none; width: 100%; flex-direction: column; align-items: stretch; padding: 8px 0 4px; }
+  .entete.menu-ouvert nav { display: flex; }
+  .entete nav a { padding: 12px; }
+  .entete nav a.nav-cta { margin: 8px 0 0; text-align: center; }
+  .club, .saison { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .hero { min-height: 82vh; }
+  .chiffres-liste { grid-template-columns: 1fr 1fr; gap: 22px 0; }
+  .chiffre { padding: 0 0 0 16px; }
+  .chiffre:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .competition { grid-template-columns: 70px 1fr; }
+  .competition .etat, .competition .resultat { grid-column: 2; justify-self: start; }
+  .competition.prochaine { margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+  .galerie { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; gap: 10px; }
+  .joueuses { grid-template-columns: 1fr 1fr; gap: 22px 14px; }
+  .maillot { font-size: 2rem; }
+  .joueuse h3 { font-size: 1.1rem; }
+  .contact { grid-template-columns: 1fr; padding: 24px; }
+  .contact-actions, .contact-details { justify-content: flex-start; }
+  .visionneuse[open] { grid-template-columns: 40px 1fr 40px; }
 }

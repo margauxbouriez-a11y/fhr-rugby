@@ -5,89 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>FHR – Espace privé</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
 </head>
-<body>
-  <header>
-    <div class="brand">
-      <img src="images/logo.png" alt="Logo FHR" onerror="this.style.display='none'" />
-      <div><h1>FHR</h1><span>Espace privé du bureau</span></div>
-    </div>
-    <nav><a href="index.html">← Site public</a><a href="#" id="deconnexion">Déconnexion</a></nav>
-  </header>
-
+<body class="admin">
   <!-- Connexion -->
-  <section id="ecran-connexion">
-    <div class="boite" style="max-width:380px;margin:40px auto;background:#fff;padding:28px;border-radius:14px;border-top:8px solid var(--rose)">
-      <h2 style="color:var(--bleu);margin-top:0">Connexion</h2>
-      <form class="carte-form" id="form-connexion">
-        <input type="password" id="mdp" placeholder="Mot de passe de l'équipe" required />
-        <button type="submit">Entrer</button>
-        <div class="message" id="msg-connexion"></div>
-      </form>
-    </div>
-  </section>
+  <main class="connexion" id="ecran-connexion">
+    <form class="formulaire carte-connexion" id="form-connexion">
+      <div class="marque marque-connexion">
+        <img src="images/logo.png" alt="" width="44" height="44" />
+        <span><b>FHR</b><small>Espace privé du bureau</small></span>
+      </div>
+      <label>Mot de passe de l'équipe<input type="password" id="mdp" autocomplete="current-password" required /></label>
+      <button type="submit" class="bouton bouton-rose">Se connecter</button>
+      <p class="message" id="msg-connexion" role="alert"></p>
+      <a href="index.html" class="retour">Retour au site</a>
+    </form>
+  </main>
 
   <!-- Espace privé -->
-  <section id="espace" style="display:none">
-    <div class="onglets">
-      <button data-p="p-evenements" class="actif">Événements</button>
-      <button data-p="p-inscrits">Inscrits</button>
-      <button data-p="p-budget">Budget</button>
-      <button data-p="p-sponsors">To-do sponsors</button>
-    </div>
-
-    <div class="panneau actif" id="p-evenements">
-      <h2 class="titre">Créer un événement</h2>
-      <form class="carte-form" id="form-evenement" style="max-width:560px">
-        <input name="title" placeholder="Titre (ex : Tournoi à 7 de Toussaint)" required />
-        <input name="event_date" type="date" required />
-        <input name="event_time" type="time" />
-        <input name="location" placeholder="Lieu" required />
-        <textarea name="description" rows="3" placeholder="Description"></textarea>
-        <button type="submit">Ajouter l'événement</button>
-      </form>
-      <h2 class="titre" style="margin-top:36px">Événements publiés</h2>
-      <table><thead><tr><th>Date</th><th>Heure</th><th>Titre</th><th>Lieu</th><th></th></tr></thead><tbody id="t-evenements"></tbody></table>
-    </div>
-
-    <div class="panneau" id="p-inscrits">
-      <h2 class="titre">Inscrits par événement</h2>
-      <button class="secondaire" id="export-inscrits">Télécharger tout (Excel/CSV)</button>
-      <div id="tableaux-inscrits" style="margin-top:20px"></div>
-    </div>
-
-    <div class="panneau" id="p-budget">
-      <h2 class="titre">Budget</h2>
-      <div class="totaux">
-        <div class="total">Recettes<b id="tot-recettes">0 €</b></div>
-        <div class="total">Dépenses<b id="tot-depenses">0 €</b></div>
-        <div class="total">Solde<b id="tot-solde">0 €</b></div>
+  <div class="espace" id="espace" hidden>
+    <aside class="barre">
+      <div class="marque">
+        <img src="images/logo.png" alt="" width="40" height="40" />
+        <span><b>FHR</b><small>Espace privé</small></span>
       </div>
-      <form class="carte-form" id="form-budget" style="max-width:560px">
-        <input name="label" placeholder="Libellé (ex : Location minibus)" required />
-        <select name="entry_type"><option value="depense">Dépense</option><option value="recette">Recette</option></select>
-        <input name="category" placeholder="Catégorie (Équipement, Déplacement, Sponsoring…)" />
-        <input name="amount" type="number" step="0.01" min="0" placeholder="Montant (€)" required />
-        <input name="entry_date" type="date" required />
-        <button type="submit">Ajouter au budget</button>
-      </form>
-      <div style="margin-top:20px"><button class="secondaire" id="export-budget">Télécharger le budget (CSV)</button></div>
-      <table style="margin-top:14px"><thead><tr><th>Date</th><th>Libellé</th><th>Catégorie</th><th>Type</th><th>Montant</th></tr></thead><tbody id="t-budget"></tbody></table>
-    </div>
+      <nav class="onglets" id="onglets" aria-label="Rubriques">
+        <p class="groupe">Contenu du site</p>
+        <button data-p="reglages" class="actif">Textes et contact</button>
+        <button data-p="chiffre">Chiffres clés</button>
+        <button data-p="palmares">Palmarès</button>
+        <button data-p="joueuse">Joueuses</button>
+        <button data-p="entrainement">Entraînements</button>
+        <button data-p="competition">Calendrier</button>
+        <button data-p="photo">Photos des tournois</button>
+        <button data-p="partenaire">Sponsors</button>
+        <button data-p="offre">Offres de partenariat</button>
+        <p class="groupe">Gestion de l'équipe</p>
+        <button data-p="p-evenements">Événements</button>
+        <button data-p="p-inscrits">Inscrits</button>
+        <button data-p="p-budget">Budget</button>
+        <button data-p="p-todos">Suivi sponsors</button>
+      </nav>
+      <div class="barre-bas">
+        <a href="index.html" target="_blank" rel="noopener">Voir le site</a>
+        <a href="#" id="deconnexion">Se déconnecter</a>
+      </div>
+    </aside>
 
-    <div class="panneau" id="p-sponsors">
-      <h2 class="titre">To-do sponsors</h2>
-      <form class="carte-form" id="form-todo" style="max-width:560px;grid-template-columns:1fr 2fr auto">
-        <input name="sponsor" placeholder="Sponsor" required />
-        <input name="task" placeholder="Action (ex : poster le logo sur Instagram)" required />
-        <button type="submit">Ajouter</button>
-      </form>
-      <div id="liste-todos" style="margin-top:20px"></div>
-    </div>
-  </section>
+    <main class="travail">
+      <!-- Panneaux de contenu générés par admin.js -->
+      <div id="panneaux-contenu"></div>
+
+      <!-- Événements -->
+      <section class="panneau" id="p-evenements">
+        <header class="panneau-tete"><div><h1>Événements</h1><p>Les événements publiés apparaissent sur le site avec un bouton d'inscription.</p></div></header>
+        <form class="formulaire carte grille-form" id="form-evenement">
+          <label class="large">Titre<input name="title" placeholder="Tournoi à 7 de Toussaint" required /></label>
+          <label>Date<input name="event_date" type="date" required /></label>
+          <label>Heure<input name="event_time" type="time" /></label>
+          <label class="large">Lieu<input name="location" required /></label>
+          <label class="large">Description<textarea name="description" rows="3"></textarea></label>
+          <div class="large"><button type="submit" class="bouton bouton-rose">Publier l'événement</button></div>
+        </form>
+        <div class="tableau-cadre"><table><thead><tr><th>Date</th><th>Heure</th><th>Titre</th><th>Lieu</th><th></th></tr></thead><tbody id="t-evenements"></tbody></table></div>
+      </section>
+
+      <!-- Inscrits -->
+      <section class="panneau" id="p-inscrits">
+        <header class="panneau-tete"><div><h1>Inscrits</h1><p>Les inscriptions reçues, regroupées par événement.</p></div>
+          <button class="bouton bouton-ligne" id="export-inscrits">Télécharger (Excel/CSV)</button></header>
+        <div id="tableaux-inscrits"></div>
+      </section>
+
+      <!-- Budget -->
+      <section class="panneau" id="p-budget">
+        <header class="panneau-tete"><div><h1>Budget</h1><p>Recettes et dépenses de la saison.</p></div>
+          <button class="bouton bouton-ligne" id="export-budget">Télécharger (CSV)</button></header>
+        <div class="totaux">
+          <div class="total">Recettes<b id="tot-recettes">0 €</b></div>
+          <div class="total">Dépenses<b id="tot-depenses">0 €</b></div>
+          <div class="total">Solde<b id="tot-solde">0 €</b></div>
+        </div>
+        <form class="formulaire carte grille-form" id="form-budget">
+          <label class="large">Libellé<input name="label" placeholder="Location minibus" required /></label>
+          <label>Type<select name="entry_type"><option value="depense">Dépense</option><option value="recette">Recette</option></select></label>
+          <label>Catégorie<input name="category" placeholder="Déplacement, Équipement, Sponsoring…" /></label>
+          <label>Montant (€)<input name="amount" type="number" step="0.01" min="0" required /></label>
+          <label>Date<input name="entry_date" type="date" required /></label>
+          <div class="large"><button type="submit" class="bouton bouton-rose">Ajouter au budget</button></div>
+        </form>
+        <div class="tableau-cadre"><table><thead><tr><th>Date</th><th>Libellé</th><th>Catégorie</th><th>Type</th><th>Montant</th></tr></thead><tbody id="t-budget"></tbody></table></div>
+      </section>
+
+      <!-- Suivi sponsors -->
+      <section class="panneau" id="p-todos">
+        <header class="panneau-tete"><div><h1>Suivi sponsors</h1><p>Les contreparties promises à chaque sponsor, à cocher quand c'est fait.</p></div></header>
+        <form class="formulaire carte grille-form" id="form-todo">
+          <label>Sponsor<input name="sponsor" required /></label>
+          <label>Action<input name="task" placeholder="Poster le logo sur Instagram" required /></label>
+          <div class="large"><button type="submit" class="bouton bouton-rose">Ajouter la tâche</button></div>
+        </form>
+        <div id="liste-todos"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Fenêtre d'édition d'un élément -->
+  <dialog class="fenetre fenetre-large" id="editeur" aria-labelledby="editeur-titre">
+    <form class="formulaire" id="form-editeur" method="dialog">
+      <h3 id="editeur-titre">Modifier</h3>
+      <div class="champs" id="editeur-champs"></div>
+      <div class="actions">
+        <button type="submit" class="bouton bouton-rose" id="editeur-enregistrer">Enregistrer</button>
+        <button type="button" class="bouton bouton-ligne" id="editeur-annuler">Annuler</button>
+      </div>
+      <p class="message" id="editeur-msg" role="status"></p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="config.js"></script>
+  <script src="contenu.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>
